@@ -1,0 +1,303 @@
+<!DOCTYPE HTML>
+<Html>
+<Head>
+<script>
+var user_id=0,exam_id=49;
+
+
+function checkTime(i)
+{
+if (i<10)
+  {
+  i="0" + i;
+  }
+return i;
+}
+
+
+
+ 
+	
+
+
+function validateForm()
+{
+		
+		var name=document.forms["registerForm"]["name"].value;
+		var age=document.forms["registerForm"]["age"].value;
+		var qualification=document.forms["registerForm"]["qualification"].value;
+		var cgpa=document.forms["registerForm"]["cgpa"].value;
+		var region=document.forms["registerForm"]["region"].value;
+		var group = document.registerForm.gender;
+                var gen=document.registerForm.gen;
+		var date1=document.registerForm.date1;
+		
+var x=document.forms["registerForm"]["email"].value;
+var atpos=x.indexOf("@");
+var dotpos=x.lastIndexOf(".");
+if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
+  {
+  alert("Not a valid e-mail address");
+  return false;
+  }	
+
+
+ 
+
+
+		if(null==name || ""==name)
+		{
+			alert("Kindly Enter Your Name ");
+			name.focus();
+			return false;
+		}
+		
+		
+
+		var letters=/^[a-zA-Z]+$/
+		
+                if (!name.match(letters))
+		{
+		alert("name must have alphabets only");
+		return false;
+		}
+		
+		
+
+		if(age<18 || age>22)
+		{
+			alert("You are not eligible for this exams on age considerations");
+			return false;
+		}
+		
+		
+
+		if(qualification.toLowerCase()!="btech")
+		{
+			alert("This exam is only applicable to BTECH qualified applicants");
+			return false;
+		}
+		
+		
+
+		if(cgpa<8.0)
+		{
+			alert("The minimum cgpa required for exam is 8.0");
+			return false;
+		}
+
+//radio button validation
+var sex;	
+for (var i=0; i<group.length; i++) 
+{
+if (group[i].checked)
+{
+ sex=group[i].value;
+break;
+}
+}
+if (i==group.length)
+{
+ alert("No radio button is checked");
+return false;
+}
+
+
+//checkbox validation
+
+
+
+var opt;	
+for (i=0; i<gen.length; i++) 
+{
+if (gen[i].checked)
+{
+ opt=gen[i].value;
+break;
+}
+}
+if (i==gen.length)
+{
+alert("No check box button is checked");
+return false;
+}
+
+
+//drop down validation
+
+var dropdown = document.getElementById('age_group');
+var age_group_info=document.getElementById("age_group_info")
+
+if(dropdown.selectedIndex==0)
+{
+alert("Please select Age Group");
+age_group_info.innerHTML="Select your Age Group";
+dropdown.focus();
+return false; 
+}
+
+
+
+
+
+
+
+
+
+
+//time of form submission
+var today=new Date();
+var h=today.getHours();
+var m=today.getMinutes();
+var s=today.getSeconds();
+
+// add a zero in front of numbers<10
+m=checkTime(m);
+s=checkTime(s);
+
+
+		
+		
+		user_id++;
+//new window 
+		
+		myWindow=window.open('','','width=100%,height=100%');
+		myWindow.alert("Welcome "+name+" , You have been registered");
+		myWindow.document.write(" User Id: "+user_id+"<br>");
+		myWindow.document.write(" User sex: "+sex+"<br>");
+		myWindow.document.write(" Exam ID: "+exam_id+"<br>");
+		myWindow.document.write(" Geographical Area_ID: "+region+"<br>");
+		myWindow.document.write(" user age: "+dropdown[dropdown.selectedIndex].text+"<br>");	
+		myWindow.document.write(" time_submit: "+h+":"+m+":"+s+"<br>");
+                              myWindow.document.write(" date "+today+"<br>");	
+myWindow.document.write("Option "+opt+"<br>");
+		
+myWindow.document.write("Booking Date "+date1+"<br>");
+
+myWindow.focus();	
+	
+}
+	
+</script>
+	
+<script type="text/javascript">
+
+function any()
+{
+		var elem = document.getElementById("mytext");
+		elem.value = "My default value";
+}
+
+
+</script>
+</head>
+
+
+
+<body>
+	<form name="registerForm" onsubmit="return validateForm()" method="post">
+	<H2>Register Yourself</H2>
+	<table border="1">
+	<tr>
+		<td>Name: </td>
+		<td> <input type="text" name="name"></td>
+	</tr>
+
+
+	<tr>
+		<td>Email: </td>
+		<td> <input type="text" name="email"></td>
+	</tr>
+	
+
+	<tr>
+		<td>Age:</td>
+		<td><input type="text" name="age"></td>
+	</tr>
+	<tr>
+		<td>Qualification:</td> 
+		<td><input type="text" name="qualification"></td>
+	</tr>
+	<tr>
+		<td>CGPA:</td>
+		<td> <input type="text" name="cgpa"></td>
+	</tr>
+		<td>Region:</td>
+		
+		<td>
+		<select name="region">
+			<option name="select" value="select">select</option>
+			<option value="Delhi">Delhi</option>
+			<option value="Mumbai">Mumbai</option>
+			<option value="Kolkata">Kolkata</option>
+		</select>
+		</td>
+	</tr>
+
+
+<tr>
+<td>gender</td>
+<td><input type="radio" name="gender" value="male">male</input>
+<input type="radio" name="gender" value="female">female</input>
+</td>
+</tr>
+
+
+<tr>
+<td>Age Group</td> 
+<td><select name="age_group" class="normal_lb_border" id="age_group">
+<option value="0" selected>Select your age group</option>
+<option value="1">10-15</option>
+<option value="2">16-19</option>
+<option value="3">20-25</option>
+<option value="4">26-30</option>
+<option value="5">31-40</option>
+<option value="6">41-50</option>
+<option value="7">51-60</option>
+<option value="8">61-70</option>
+<option value="9">71-80</option>
+<option value="10">81-90</option>
+<option value="11">91-100</option>
+</select> 
+<label id="age_group_info" style="color: red; font-style: italic;"></label>
+</td> 
+<td>&nbsp;</td>
+</tr> 
+
+
+<tr>
+<td>Booking Date:</td>
+<td>
+<input type="date" name="date1">
+</td>
+</tr>	
+
+
+<tr>
+<td>Option:</td>
+<td><input type="checkbox" name="gen" value="A">A
+<input type="checkbox" name="gen" value="B">B</td>
+</tr>
+
+<tr>
+<td>Do not Call</td>
+<td><input type="checkbox" onclick="if(this.checked==true){document.registerForm.telephone.disabled = true;}">
+</td>
+</tr>
+
+<tr>
+<td>Phone Number:</td>
+<td><input type="text" name="telephone"></td>
+</tr>
+
+
+<tr>
+		<td colspan=2>
+		<input type="submit" value="Submit">
+		</td>
+</tr>	
+	
+</form>
+
+</body>
+</html>
